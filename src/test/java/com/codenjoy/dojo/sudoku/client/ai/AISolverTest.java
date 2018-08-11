@@ -34,14 +34,14 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
-public class ApofigSolverTest {
+public class AISolverTest {
 
     private Solver ai;
     private Board board;
 
     @Before
     public void setup() {
-        ai = new ApofigSolver(new RandomDice());
+        ai = new AISolver(new RandomDice());
     }
 
     private void shBoard(String boardString) {

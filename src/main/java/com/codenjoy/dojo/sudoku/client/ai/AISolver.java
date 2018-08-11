@@ -34,11 +34,11 @@ import java.util.*;
 
 import static com.codenjoy.dojo.services.PointImpl.pt;
 
-public class ApofigSolver implements Solver<Board> {
+public class AISolver implements Solver<Board> {
 
     private static final int SIZE = 9;
 
-    public ApofigSolver(Dice dice) {
+    public AISolver(Dice dice) {
     }
 
     @Override
@@ -145,7 +145,7 @@ public class ApofigSolver implements Solver<Board> {
 
     public static void start(String name, Dice dice) {
         WebSocketRunner.runAI(name,
-                new ApofigSolver(dice),
+                new AISolver(dice),
                 new Board());
     }
 }
