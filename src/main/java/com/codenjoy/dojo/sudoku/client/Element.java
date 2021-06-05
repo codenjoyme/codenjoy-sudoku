@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.sudoku.model;
+package com.codenjoy.dojo.sudoku.client;
 
 /*-
  * #%L
@@ -30,7 +30,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public enum Elements implements CharElements {
+public enum Element implements CharElements {
 
     NONE(' '),   // отгадай, что тут за цифра
     BORDER('☼'), // граница, проигнорь ее ;) она не учитывается в координатах
@@ -47,7 +47,7 @@ public enum Elements implements CharElements {
 
     final char ch;
 
-    Elements(char ch) {
+    Element(char ch) {
         this.ch = ch;
     }
 
@@ -61,8 +61,8 @@ public enum Elements implements CharElements {
         return String.valueOf(ch);
     }
 
-    public static Elements valueOf(int n) {
-        for (Elements el : Elements.values()) {
+    public static Element valueOf(int n) {
+        for (Element el : Element.values()) {
             if (String.valueOf(n).equals("" + el.ch)) {
                 return el;
             }
@@ -70,8 +70,8 @@ public enum Elements implements CharElements {
         throw new IllegalArgumentException("Нет такого елемента: " + n);
     }
 
-    public static Elements valueOf(char ch) {
-        for (Elements el : Elements.values()) {
+    public static Element valueOf(char ch) {
+        for (Element el : Element.values()) {
             if (el.ch == ch) {
                 return el;
             }
@@ -79,12 +79,12 @@ public enum Elements implements CharElements {
         throw new IllegalArgumentException("No such element for " + ch);
     }
 
-    public static Elements[] valuesExcept(Elements... excluded) {
-        List<Elements> list = Arrays.asList(excluded);
+    public static Element[] valuesExcept(Element... excluded) {
+        List<Element> list = Arrays.asList(excluded);
         return Arrays.stream(values())
                 .filter(el -> !list.contains(el))
                 .collect(toList())
-                .toArray(new Elements[0]);
+                .toArray(new Element[0]);
     }
 
     public Integer value() {
