@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.sudoku.client.ai;
+package com.codenjoy.dojo.sudoku.services.ai;
 
 /*-
  * #%L
@@ -26,6 +26,7 @@ package com.codenjoy.dojo.sudoku.client.ai;
 import com.codenjoy.dojo.client.Solver;
 import com.codenjoy.dojo.services.RandomDice;
 import com.codenjoy.dojo.sudoku.client.Board;
+import com.codenjoy.dojo.sudoku.services.ai.AISolver;
 import org.junit.Before;
 import org.junit.Test;
 

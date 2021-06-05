@@ -1,4 +1,4 @@
-package com.codenjoy.dojo.sudoku.client.ai;
+package com.codenjoy.dojo.sudoku.services.ai;
 
 /*-
  * #%L

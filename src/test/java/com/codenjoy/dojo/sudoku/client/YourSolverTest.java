@@ -31,7 +31,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class SolverTest {
+public class YourSolverTest {
 
     private Dice dice;
     private Solver ai;
