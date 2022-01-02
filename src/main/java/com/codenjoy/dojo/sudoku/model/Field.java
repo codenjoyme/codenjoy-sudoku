@@ -25,8 +25,9 @@ package com.codenjoy.dojo.sudoku.model;
 
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.multiplayer.GameField;
+import com.codenjoy.dojo.services.multiplayer.PlayerHero;
 
-public interface Field extends GameField<Player> {
+public interface Field extends GameField<Player, PlayerHero> {
 
     boolean isGameOver();
 
