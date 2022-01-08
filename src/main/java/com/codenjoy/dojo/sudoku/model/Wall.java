@@ -25,7 +25,7 @@ package com.codenjoy.dojo.sudoku.model;
 
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
-import com.codenjoy.dojo.services.State;
+import com.codenjoy.dojo.services.printer.state.State;
 import com.codenjoy.dojo.games.sudoku.Element;
 
 public class Wall extends PointImpl implements State<Element, Player> {
