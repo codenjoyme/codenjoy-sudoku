@@ -168,7 +168,7 @@ public class LevelImplTest {
         LengthToXY xy = new LengthToXY(SIZE);
         for (int x = 0; x < SIZE; x++) {
             for (int y = 0; y < SIZE; y++) {
-                arr[x][y] = Integer.parseInt("" + board.charAt(xy.getLength(x, y)));
+                arr[x][y] = Integer.parseInt("" + board.charAt(xy.length(x, y)));
             }
         }
 
