@@ -67,7 +67,7 @@ public class Level extends AbstractLevel {
     }
 
     private String withBorders(String input) {
-        StringBuffer result = new StringBuffer();
+        StringBuilder result = new StringBuilder();
 
         result.append("☼☼☼☼☼☼☼☼☼☼☼☼☼");
         for (int i = 0; i <= SIZE - 1; i++) {
