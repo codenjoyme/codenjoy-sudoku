@@ -23,6 +23,7 @@ package com.codenjoy.dojo.sudoku.model.level;
  */
 
 
+import com.codenjoy.dojo.services.BoardMap;
 import com.codenjoy.dojo.services.field.AbstractLevel;
 import com.codenjoy.dojo.sudoku.model.Cell;
 import com.codenjoy.dojo.sudoku.model.Wall;
@@ -56,15 +57,13 @@ public class Level extends AbstractLevel {
     }
 
     private void parse() {
-        map = withBorders(map);
+        map = new BoardMap(withBorders(map.map()));
         mask = withBorders(mask);
 
         if (map.length() != mask.length()) {
             throw new IllegalArgumentException("Маска не совпадает с полем по размеру: " +
                     map.length() + "-" + mask.length());
         }
-
-        resize();
     }
 
     private String withBorders(String input) {
@@ -98,13 +97,13 @@ public class Level extends AbstractLevel {
         }
 
         this.mask = mask.toString();
-        this.map = board.toString();
+        this.map = new BoardMap(board.toString());
     }
 
     public List<Cell> cells() {
         // TODO а тут точно надо Element.HIDDEN?
         return find((pt, el) -> {
-                    int i = xy.length(pt.getX(), pt.getY());
+                    int i = map.xy().length(pt.getX(), pt.getY());
                     boolean visible = mask.charAt(i) != HIDDEN.ch();
                     return new Cell(pt, el.value(), visible);
                 },
@@ -123,7 +122,7 @@ public class Level extends AbstractLevel {
     }
 
     public String map() {
-        return map;
+        return map.map();
     }
 
     public String all() {
