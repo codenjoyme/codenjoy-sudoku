@@ -107,7 +107,8 @@ public class Sudoku implements Field {
         player.event(Event.WIN);
     }
 
-    public int getSize() {
+    @Override
+    public int size() {
         return size;
     }
 
