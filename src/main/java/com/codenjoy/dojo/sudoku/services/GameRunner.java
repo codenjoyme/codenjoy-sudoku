@@ -47,6 +47,8 @@ import static com.codenjoy.dojo.services.settings.SimpleParameter.v;
 
 public class GameRunner extends AbstractGameType<GameSettings> implements GameType<GameSettings> {
 
+    public static final String GAME_NAME = "sudoku";
+
     @Override
     public GameSettings getSettings() {
         return new GameSettings();
@@ -75,7 +77,7 @@ public class GameRunner extends AbstractGameType<GameSettings> implements GameTy
 
     @Override
     public String name() {
-        return "sudoku";
+        return GAME_NAME;
     }
 
     @Override
