@@ -23,6 +23,7 @@ package com.codenjoy.dojo.sudoku.services;
  */
 
 import com.codenjoy.dojo.services.event.Calculator;
+import com.codenjoy.dojo.services.settings.PropertiesKey;
 import com.codenjoy.dojo.services.settings.SettingsImpl;
 import com.codenjoy.dojo.services.settings.SettingsReader;
 import com.codenjoy.dojo.sudoku.model.level.Level;
@@ -31,22 +32,23 @@ import com.codenjoy.dojo.sudoku.model.level.Levels;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.codenjoy.dojo.sudoku.services.GameRunner.GAME_NAME;
 import static com.codenjoy.dojo.sudoku.services.GameSettings.Keys.*;
 
 public class GameSettings extends SettingsImpl implements SettingsReader<GameSettings> {
 
-    public enum Keys implements Key {
+    public enum Keys implements PropertiesKey {
 
-        WIN_SCORE("[Score] Win score"),
-        FAIL_PENALTY("[Score] Fail penalty"),
-        LOSE_PENALTY("[Score] Lose penalty"),
-        SUCCESS_SCORE("[Score] Success score"),
-        LEVELS_COUNT("[Level] Levels count");
+        WIN_SCORE,
+        FAIL_PENALTY,
+        LOSE_PENALTY,
+        SUCCESS_SCORE,
+        LEVELS_COUNT;
 
         private String key;
 
-        Keys(String key) {
-            this.key = key;
+        Keys() {
+            this.key = key(GAME_NAME);
         }
 
         @Override
