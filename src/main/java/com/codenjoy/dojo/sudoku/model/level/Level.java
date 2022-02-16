@@ -23,6 +23,7 @@ package com.codenjoy.dojo.sudoku.model.level;
  */
 
 
+import com.codenjoy.dojo.games.sudoku.ElementUtils;
 import com.codenjoy.dojo.services.BoardMap;
 import com.codenjoy.dojo.services.field.AbstractLevel;
 import com.codenjoy.dojo.sudoku.model.Cell;
@@ -105,9 +106,9 @@ public class Level extends AbstractLevel {
         return find((pt, el) -> {
                     int i = map.xy().length(pt.getX(), pt.getY());
                     boolean visible = mask.charAt(i) != HIDDEN.ch();
-                    return new Cell(pt, el.value(), visible);
+                    return new Cell(pt, ElementUtils.value(el), visible);
                 },
-                valuesExcept(BORDER, NONE, HIDDEN))
+                ElementUtils.valuesExcept(BORDER, NONE, HIDDEN))
                 .stream()
                 .sorted()
                 .collect(toList());

@@ -23,23 +23,24 @@ package com.codenjoy.dojo.sudoku.model;
  */
 
 import com.codenjoy.dojo.games.sudoku.Element;
+import com.codenjoy.dojo.games.sudoku.ElementUtils;
 import org.junit.Test;
 
 import java.util.Arrays;
 
 import static com.codenjoy.dojo.games.sudoku.Element.*;
 import static java.util.stream.Collectors.toList;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class ElementTest {
 
     @Test
     public void testValuesExcept() {
         assertEquals("[ , ☼, *, 1, 2, 3, 4, 5, 6, 7, 8, 9]",
-                Arrays.toString(Element.valuesExcept()));
+                Arrays.toString(ElementUtils.valuesExcept()));
 
         assertEquals("[1, 2, 3, 4, 5, 6, 7, 8, 9]",
-                Arrays.toString(Element.valuesExcept(BORDER, NONE, HIDDEN)));
+                Arrays.toString(ElementUtils.valuesExcept(BORDER, NONE, HIDDEN)));
     }
 
     @Test
@@ -47,7 +48,7 @@ public class ElementTest {
         assertEquals("[' ':0, '☼':-1, '*':-1, '1':1, '2':2, '3':3, " +
                         "'4':4, '5':5, '6':6, '7':7, '8':8, '9':9]",
                 Arrays.stream(Element.values())
-                        .map(el -> String.format("'%s':%s", el.ch(), el.value()))
+                        .map(el -> String.format("'%s':%s", el.ch(), ElementUtils.value(el)))
                         .collect(toList())
                         .toString());
     }

@@ -24,9 +24,10 @@ package com.codenjoy.dojo.sudoku.services.ai;
 
 
 import com.codenjoy.dojo.client.Solver;
+import com.codenjoy.dojo.games.sudoku.Board;
+import com.codenjoy.dojo.games.sudoku.ElementUtils;
 import com.codenjoy.dojo.services.Dice;
 import com.codenjoy.dojo.services.Point;
-import com.codenjoy.dojo.games.sudoku.Board;
 
 import java.util.*;
 
@@ -54,7 +55,7 @@ public class AISolver implements Solver<Board> {
 
         for (int x = 1; x <= SIZE; x++) {
             for (int y = 1; y <= SIZE; y++) {
-                Integer current = board.getAt(Board.toAbsolute(x), Board.toAbsolute(y)).value();
+                Integer current = ElementUtils.value(board.getAt(Board.toAbsolute(x), Board.toAbsolute(y)));
 
                 for (int xx = 1; xx <= SIZE; xx++) {
                     Set<Integer> list = deprecated.get(pt(xx, y));
@@ -104,7 +105,7 @@ public class AISolver implements Solver<Board> {
         Map<Point, Set<Integer>> toSet = new TreeMap<>();
         for (int x = 1; x <= SIZE; x++) {
             for (int y = 1; y <= SIZE; y++) {
-                Integer current = board.getAt(Board.toAbsolute(x), Board.toAbsolute(y)).value();
+                Integer current = ElementUtils.value(board.getAt(Board.toAbsolute(x), Board.toAbsolute(y)));
                 Point key = pt(x, y);
 
                 Set<Integer> numbers = accepted.get(key);

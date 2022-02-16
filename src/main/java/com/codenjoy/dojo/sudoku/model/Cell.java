@@ -23,10 +23,11 @@ package com.codenjoy.dojo.sudoku.model;
  */
 
 
+import com.codenjoy.dojo.games.sudoku.Element;
+import com.codenjoy.dojo.games.sudoku.ElementUtils;
 import com.codenjoy.dojo.services.Point;
 import com.codenjoy.dojo.services.PointImpl;
 import com.codenjoy.dojo.services.printer.state.State;
-import com.codenjoy.dojo.games.sudoku.Element;
 
 public class Cell extends PointImpl implements State<Element, Player> {
     private int number;
@@ -54,10 +55,10 @@ public class Cell extends PointImpl implements State<Element, Player> {
     @Override
     public Element state(Player player, Object... alsoAtPoint) {
         if (visible) {
-            return Element.valueOf(number);
+            return ElementUtils.valueOf(number);
         } else {
             if (alsoAtPoint[1] != null) {
-                return Element.valueOf(((Cell) alsoAtPoint[1]).getNumber());
+                return ElementUtils.valueOf(((Cell) alsoAtPoint[1]).getNumber());
             } else {
                 return Element.NONE;
             }
