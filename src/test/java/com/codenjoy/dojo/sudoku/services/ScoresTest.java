@@ -90,7 +90,7 @@ public class ScoresTest {
     }
 
     @Test
-    public void shouldStillZeroAfterFail() {
+    public void shouldNotBeLessThanZero() {
         // given
         givenScores(0);
 
