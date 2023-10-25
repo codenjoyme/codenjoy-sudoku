@@ -1,7 +1,7 @@
-| Settings name | Action |
-|---------------|--------|
-| WIN_SCORE | [Score] Win score |
-| FAIL_PENALTY | [Score] Fail penalty |
-| LOSE_PENALTY | [Score] Lose penalty |
-| SUCCESS_SCORE | [Score] Success score |
-| LEVELS_COUNT | [Level] Levels count |
+| Action | Settings name |
+|--------|---------------|
+| [Score] Win score | WIN_SCORE |
+| [Score] Fail penalty | FAIL_PENALTY |
+| [Score] Lose penalty | LOSE_PENALTY |
+| [Score] Success score | SUCCESS_SCORE |
+| [Level] Levels count | LEVELS_COUNT |
