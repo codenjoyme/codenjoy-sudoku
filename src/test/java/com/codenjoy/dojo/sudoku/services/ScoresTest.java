@@ -23,139 +23,92 @@ package com.codenjoy.dojo.sudoku.services;
  */
 
 
-import com.codenjoy.dojo.services.PlayerScores;
-import com.codenjoy.dojo.services.event.Calculator;
-import com.codenjoy.dojo.services.event.ScoresImpl;
+import com.codenjoy.dojo.services.event.ScoresMap;
 import com.codenjoy.dojo.sudoku.TestGameSettings;
-import org.junit.Before;
+import com.codenjoy.dojo.utils.scorestest.AbstractScoresTest;
 import org.junit.Test;
 
 import static com.codenjoy.dojo.sudoku.services.GameSettings.Keys.*;
-import static org.junit.Assert.assertEquals;
 
-public class ScoresTest {
+public class ScoresTest extends AbstractScoresTest {
 
-    private PlayerScores scores;
-    private GameSettings settings;
-
-    public void fail() {
-        scores.event(Event.FAIL);
+    @Override
+    public GameSettings settings() {
+        return new TestGameSettings()
+                .integer(WIN_SCORE, 1)
+                .integer(LOSE_PENALTY, -1)
+                .integer(SUCCESS_SCORE, 2)
+                .integer(FAIL_PENALTY, -2);
     }
 
-    public void success() {
-        scores.event(Event.SUCCESS);
+    @Override
+    protected Class<? extends ScoresMap> scores() {
+        return Scores.class;
     }
 
-    public void win() {
-        scores.event(Event.WIN);
-    }
-
-    private void lose() {
-        scores.event(Event.LOSE);
-    }
-
-    @Before
-    public void setup() {
-        settings = new TestGameSettings();
+    @Override
+    protected Class<? extends Enum> eventTypes() {
+        return Event.class;
     }
 
     @Test
     public void shouldCollectScores() {
-        // given
-        givenScores(140);
-
-        // when
-        success();
-        success();
-        success();
-        success();
-
-        fail();
-
-        win();
-
-        lose();
-
-        // then
-        assertEquals(140
-                    + 4 * settings.integer(SUCCESS_SCORE)
-                    + settings.integer(FAIL_PENALTY)
-                    + settings.integer(WIN_SCORE)
-                    + settings.integer(LOSE_PENALTY),
-                scores.getScore());
-    }
-
-    private void givenScores(int score) {
-        scores = new ScoresImpl<>(score, new Calculator<>(new Scores(settings)));
+        assertEvents("100:\n" +
+                "SUCCESS > +2 = 102\n" +
+                "SUCCESS > +2 = 104\n" +
+                "SUCCESS > +2 = 106\n" +
+                "SUCCESS > +2 = 108\n" +
+                "FAIL > -2 = 106\n" +
+                "WIN > +1 = 107\n" +
+                "LOSE > -1 = 106");
     }
 
     @Test
     public void shouldNotBeLessThanZero() {
-        // given
-        givenScores(0);
-
-        // when
-        fail();
-
-        // then
-        assertEquals(0, scores.getScore());
+        assertEvents("4:\n" +
+                "FAIL > -2 = 2\n" +
+                "FAIL > -2 = 0\n" +
+                "FAIL > +0 = 0");
     }
 
     @Test
     public void shouldCleanScore() {
-        // given
-        givenScores(0);
-        win();
-
-        // when
-        scores.clear();
-
-        // then
-        assertEquals(0, scores.getScore());
+        assertEvents("100:\n" +
+                "WIN > +1 = 101\n" +
+                "(CLEAN) > -101 = 0\n" +
+                "WIN > +1 = 1");
     }
 
     @Test
     public void shouldCollectScores_whenSuccess() {
         // given
-        givenScores(140);
+        settings.integer(SUCCESS_SCORE, 2);
 
-        // when
-        success();
-        success();
-
-        // then
-        assertEquals(140
-                        + 2 * settings.integer(SUCCESS_SCORE),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "SUCCESS > +2 = 102\n" +
+                "SUCCESS > +2 = 104");
     }
 
     @Test
     public void shouldCollectScores_whenFail() {
         // given
-        givenScores(140);
+        settings.integer(LOSE_PENALTY, -1);
 
-        // when
-        fail();
-        fail();
-
-        // then
-        assertEquals(140
-                        + 2 * settings.integer(FAIL_PENALTY),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "FAIL > -2 = 98\n" +
+                "FAIL > -2 = 96");
     }
 
     @Test
     public void shouldCollectScores_whenWin() {
         // given
-        givenScores(140);
+        settings.integer(WIN_SCORE, 1);
 
-        // when
-        win();
-        win();
-
-        // then
-        assertEquals(140
-                        + 2 * settings.integer(WIN_SCORE),
-                scores.getScore());
+        // when then
+        assertEvents("100:\n" +
+                "WIN > +1 = 101\n" +
+                "WIN > +1 = 102");
     }
 }
